@@ -8,7 +8,10 @@
 import scrapy
 
 
-class TutorialItem(scrapy.Item):
-    # define the fields for your item here like:
-    # name = scrapy.Field()
-    pass
+class MoneyItem(scrapy.Item):
+    title    = scrapy.Field()
+    content  = scrapy.Field()
+    category = scrapy.Field()
+    url      = scrapy.Field()
+    dt       = scrapy.Field()
+

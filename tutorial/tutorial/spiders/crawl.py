@@ -1,5 +1,6 @@
 import scrapy
-
+from datetime import datetime
+from tutorial.items import MoneyItem
 class MoneyCrawler(scrapy.Spider):
     name = "money"
     start_urls = ['https://money.udn.com/rank/newest/1001/0/1']
@@ -11,5 +12,16 @@ class MoneyCrawler(scrapy.Spider):
                 yield scrapy.Request(url, self.parse_detail)
                 
     def parse_detail(self, response):
-        title = response.css('h2::text')[0].extract()
-        print(title)
+        moneyitem = MoneyItem()
+        # 抓取標題
+        moneyitem['title'] = response.css('h2::text')[0].extract()
+        # 抓取摘要
+        moneyitem['content'] = ' '.join([e.extract() for e in response.css('#article_body p::text')])
+        # 抓取時間
+        dt = response.css('.shareBar__info--author span::text')[0].extract()
+        moneyitem['dt'] = datetime.strptime(dt, '%Y-%m-%d %H:%M')
+        #抓取類別
+        moneyitem['category'] = response.css('#nav a::text')[-1].extract()
+        #抓取連結
+        moneyitem['url'] = response.request.url
+        return moneyitem

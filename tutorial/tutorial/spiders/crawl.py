@@ -8,3 +8,8 @@ class MoneyCrawler(scrapy.Spider):
             if tr.css('td'):
                 url = tr.css('a::attr(href)')[0].extract()
                 print(url)
+                yield scrapy.Request(url, self.parse_detail)
+                
+    def parse_detail(self, response):
+        title = response.css('h2::text')[0].extract()
+        print(title)

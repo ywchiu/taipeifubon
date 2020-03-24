@@ -16,7 +16,7 @@ class MoneyCrawler(scrapy.Spider):
         # 抓取標題
         moneyitem['title'] = response.css('h2::text')[0].extract()
         # 抓取摘要
-        moneyitem['content'] = ' '.join([e.extract() for e in response.css('#article_body p::text')])
+        moneyitem['contents'] = ' '.join([e.extract() for e in response.css('#article_body p::text')])
         # 抓取時間
         dt = response.css('.shareBar__info--author span::text')[0].extract()
         moneyitem['dt'] = datetime.strptime(dt, '%Y-%m-%d %H:%M')

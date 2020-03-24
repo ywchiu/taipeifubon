@@ -10,15 +10,15 @@ class TutorialPipeline(object):
         CREATE_SQL = '''
             CREATE TABLE IF NOT EXISTS money(
                title   VARCHAR(500),
-               content TEXT,
+               contents TEXT,
                category VARCHAR(50),
                url VARCHAR(500),
                dt DATETIME
             );
         '''
-        self.conn = sqlite3.connect('news.sqlite')
+        self.conn = sqlite3.connect('/Users/davidchiu/course/taipeifubon/tutorial/news.sqlite')
         self.cur = self.conn.cursor()
-        self.cur.execute(CREATE_SQL)
+        #self.cur.execute(CREATE_SQL)
 
     def close_spider(self, spider):
         self.conn.commit()

@@ -10,7 +10,7 @@ import scrapy
 
 class MoneyItem(scrapy.Item):
     title    = scrapy.Field()
-    content  = scrapy.Field()
+    contents  = scrapy.Field()
     category = scrapy.Field()
     url      = scrapy.Field()
     dt       = scrapy.Field()
